@@ -50,5 +50,19 @@ create table organizations (
     notes             varchar2(4000)
 ); 
 
+-- create an index? Postgres version does
+-- create index organization_name_ix on organizations(name);
+
+-- this is untested, copied from Postgres. Needs to be tested to work for
+-- Oracle.
+create table organization_type_map (
+    organization_id             integer
+                                constraint org_type_map_org_id_fk
+                                references organizations(organization_id),
+    organization_type_id        integer
+                                constraint org_type_map_type_fk
+                                references organization_types(organization_type_id)
+);
+
 
 @ 'organizations-plsql-create.sql'

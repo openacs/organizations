@@ -10,16 +10,16 @@ create function inline_0 ()
 returns integer as '  
 begin 
     PERFORM acs_object_type__create_type (  
-      ''organization'', -- object_type  
-      ''Organization'', -- pretty_name 
-      ''Organization'',  -- pretty_plural 
-      ''party'',   -- supertype 
-      ''organizations'',  -- table_name 
-      ''organization_id'', -- id_column 
-      ''organization'', -- package_name 
-      ''f'', -- abstract_p 
-      null, -- type_extension_table 
-      null -- name_method 
+      ''organization'',      -- object_type  
+      ''Organization'',      -- pretty_name 
+      ''Organization'',      -- pretty_plural 
+      ''party'',             -- supertype 
+      ''organizations'',     -- table_name 
+      ''organization_id'',   -- id_column 
+      ''organization'',      -- package_name 
+      ''f'',                 -- abstract_p 
+      null,                  -- type_extension_table 
+      ''organization__name'' -- name_method 
   ); 
  
   return 0;  
@@ -32,26 +32,39 @@ drop function inline_0 ();
 
 
 ------ start of oacs new proc
-create or replace function organization__new ( varchar,varchar,text,integer,varchar, 
-varchar,varchar,integer,varchar,integer )
-returns integer as ' 
+select define_function_args('organization__new','legal_name,name,notes,organization_id,organization_type_id,reg_number,email,url,creation_user,creation_ip,context_id'); 
+
+create or replace function organization__new ( 
+	varchar, -- legal_name
+	varchar, -- name
+	text,    -- notes
+	integer, -- organization_id
+	integer, -- organization_type_id
+	varchar, -- reg_number
+	varchar, -- email
+	varchar, -- url
+	integer, -- creation_user
+	varchar, -- creation_ip
+	integer  -- context_id
+) returns integer as ' 
 declare 
-    p_legal_name         alias for $1; -- comment
-    p_name               alias for $2; -- comment
-    p_notes              alias for $3; -- comment
-    p_organization_id    alias for $4; -- comment
-    p_reg_number         alias for $5; -- comment
-    p_email              alias for $6; -- email
-    p_url                alias for $7;
-    p_creation_user      alias for $8; -- comment
-    p_creation_ip        alias for $9;
-    p_context_id         alias for $10; -- comment
+    p_legal_name           alias for $1; -- comment
+    p_name                 alias for $2; -- comment
+    p_notes                alias for $3; -- comment
+    p_organization_id      alias for $4; -- comment
+    p_organization_type_id alias for $5; -- comment
+    p_reg_number           alias for $6; -- comment
+    p_email                alias for $7; -- email
+    p_url                  alias for $8;
+    p_creation_user        alias for $9; -- comment
+    p_creation_ip          alias for $10;
+    p_context_id           alias for $11; -- comment
 
     -- local vars
     v_organization_id organizations.organization_id%TYPE; 
 begin 
   v_organization_id := party__new (  
-    null,              -- party_id
+    p_organization_id,     -- party_id
     ''organization'',
     now(), 
     p_creation_user,
@@ -77,6 +90,14 @@ begin
     p_reg_number 
   ); 
 
+  insert into organization_type_map (
+    organization_id,
+    organization_type_id
+  ) values (
+    v_organization_id,
+    p_organization_type_id
+  );
+
   PERFORM acs_permission__grant_permission (
      v_organization_id,
      p_creation_user,
@@ -90,6 +111,10 @@ end;' language 'plpgsql';
 
 ------ end new proc
 
+
+------ start of oacs del proc
+select define_function_args('organization__del','organization_id'); 
+
 create or replace function organization__del (integer) 
 returns integer as ' 
 declare 
@@ -97,19 +122,29 @@ declare
  v_return integer := 0;  
 begin 
 
+   -- these should not be necessary
    delete from acs_permissions 
      where object_id = p_organization_id; 
+
+   delete from organization_type_map
+     where organization_id = p_organization_id;
 
    delete from organizations 
      where organization_id = p_organization_id;
 
    raise NOTICE ''Deleting organization - %'',p_organization_id;
 
-   PERFORM party_delete(p_organization_id);
+   PERFORM party__delete(p_organization_id);
 
    return v_return;
 
 end;' language 'plpgsql';
+
+------ end del proc
+
+
+------ start of oacs set proc
+select define_function_args('organization__set','legal_name,name,notes,organization_id,reg_number'); 
 
 create or replace function organization__set (varchar,varchar,text,integer,varchar)
 returns integer as ' 
@@ -136,3 +171,24 @@ begin
 
 return v_return;
 end;' language 'plpgsql';
+
+------ end set proc
+
+
+------ start of oacs name proc
+select define_function_args('organization___name','organization_id');
+
+create or replace function organization__name (integer)
+returns varchar as '
+declare
+    p_organization_id    alias for $1;
+    v_organization_name  organization.name%TYPE;
+begin
+        select name into v_organization_name
+                from organizations
+                where organization_id = p_organization_id;
+    return v_organization_name;
+end;
+' language 'plpgsql';
+------ end name proc
+
