@@ -6,16 +6,13 @@
     <pretty-plural>Organizations</pretty-plural>
     <initial-install-p>f</initial-install-p>
     <singleton-p>f</singleton-p>
-
-    <version name="0.2d" url="http://openacs.org/repository/download/apm/organizations-0.2d.apm">
-    <database-support>
-        <database>oracle</database>
-        <database>postgresql</database>
-    </database-support>
+    
+    <version name="0.3d" url="http://openacs.org/repository/download/apm/organizations-0.3d.apm">
         <owner url="mailto:jon@mayuli.com">Jon Griffin</owner>
+        <owner url="mailto:jader@bread.com">Jade Rubick</owner>
         <summary>Implementation of HR-XML organizations datamodel.</summary>
+        <release-date>2004-05-26</release-date>
         <vendor url="http://www.mayuli.com">Mayuli Enterprises, LLC</vendor>
-
         <description format="text/plain">Provides the datamodel for an
       implementation of the HR-XML organizations spec, but no API for
       manipulating the data.  Also note that the Oracle code is out of sync
@@ -23,15 +20,11 @@
       what needs to be updated to make things work correctly [Jade Rubick].
         </description>
 
+        <provides url="organizations" version="0.3d"/>
         <requires url="acs-kernel" version="5.0d13"/>
 
-        <files>
-            <file type="package_spec" path="organizations.info"/>
-            <file type="data_model_create" db_type="oracle" path="sql/oracle/organizations-create.sql"/>
-            <file type="data_model" db_type="oracle" path="sql/oracle/organizations-plsql-create.sql"/>
-            <file type="data_model_create" db_type="postgresql" path="sql/postgresql/organizations-create.sql"/>
-            <file type="data_model" db_type="postgresql" path="sql/postgresql/organizations-plsql-create.sql"/>
-        </files>
+        <callbacks>
+        </callbacks>
         <parameters>
         <!-- No version parameters -->
         </parameters>
