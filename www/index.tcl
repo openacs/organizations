@@ -60,7 +60,7 @@ template::list::create \
             label {}
             display_template {
                <if @orgs.write@>
-                <a href="add-edit" title="Edit this organization">
+                <a href="add-edit?organization_id=@orgs.organization_id@" title="Edit this organization">
 		<img src="/shared/images/Edit16.gif" height="16" width="16" 
                 alt="Edit" border="0"></a>
                 </if>
