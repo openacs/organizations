@@ -59,11 +59,14 @@ template::list::create \
        edit {
             label {}
             display_template {
-               <if @orgs.write_p@ true>
+               <if @orgs.write@>
                 <a href="add-edit" title="Edit this organization">
 		<img src="/shared/images/Edit16.gif" height="16" width="16" 
                 alt="Edit" border="0"></a>
-                </if>        
+                </if>
+                <else>
+                @orgs.write@
+                </else>
             }
         }
         name {
@@ -108,11 +111,12 @@ template::list::create \
 	}
     } 
 
-db_multirow -extend { item_url write_p } orgs orgs_query { 
+
+db_multirow -extend { item_url write } orgs orgs_query { 
 } {
     set item_url [export_vars -base "one" {organization_id}]
 
-    set write_p $write_p
+    set write $write_p
 }
 
 

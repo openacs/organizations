@@ -24,10 +24,10 @@ Pretty name.
 ';
 
 -- add some data
-insert into organization_types values (acs_object_id_seq.nextval,'Vendor');
-insert into organization_types values (acs_object_id_seq.nextval,'Customer');
-insert into organization_types values (acs_object_id_seq.nextval,'Prospect');
-insert into organization_types values (acs_object_id_seq.nextval,'Other');
+insert into organization_types (type) values ('Vendor');
+insert into organization_types (type) values ('Customer');
+insert into organization_types (type) values ('Prospect');
+insert into organization_types (type) values ('Other');
 
 -- organization
 -- this will be a party
