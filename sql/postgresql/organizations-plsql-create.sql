@@ -184,7 +184,7 @@ declare
     p_organization_id    alias for $1;
     v_organization_name  organizations.name%TYPE;
 begin
-        select name into v_organization_name
+        select name || ''_'' || organization_id into v_organization_name
                 from organizations
                 where organization_id = p_organization_id;
     return v_organization_name;
