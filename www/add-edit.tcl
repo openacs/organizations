@@ -27,15 +27,19 @@ if {[exists_and_not_null organization_id]} {
     permission::require_permission \
 	-object_id $package_id \
 	-privilege write
+
+    set org_types_used [db_list select_org_types_used { }]
+
 } else {
     set context_bar [ad_context_bar "New"] 
 
     permission::require_permission \
 	-object_id $package_id \
 	-privilege create
+
+    set org_types_used {}
 }
 
-set org_types_used [db_list select_org_types_used { }]
 
 ad_form -name org -form {
     organization_id:key
