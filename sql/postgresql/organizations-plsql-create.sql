@@ -167,7 +167,7 @@ begin
     reg_number = p_reg_number
   where organization_id = p_organization_id;
 
-  raise NOTICE ''Updating  - organization - %'',organization_id;
+  raise NOTICE ''Updating  - organization - %'',p_organization_id;
 
 return v_return;
 end;' language 'plpgsql';
