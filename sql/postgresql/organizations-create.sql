@@ -27,7 +27,7 @@ Pretty name.
 insert into organization_types values (acs_object_id_seq.nextval,'Vendor');
 insert into organization_types values (acs_object_id_seq.nextval,'Customer');
 insert into organization_types values (acs_object_id_seq.nextval,'Prospect');
-insert into organization_types values (acs_object_id_seq.nextval,'Misc.');
+insert into organization_types values (acs_object_id_seq.nextval,'Other');
 
 -- organization
 -- this will be a party
@@ -52,4 +52,14 @@ create table organizations (
 ); 
 
 create index organization_name_ix on organizations(name);
+
+create table organization_type_map (
+    organization_id             integer
+                                constraint org_type_map_org_id_fk
+                                references organizations(organization_id),
+    organization_type_id        integer
+                                constraint org_type_map_type_fk
+                                references organization_types(organization_type_id)
+);
+
 \i organizations-plsql-create.sql

@@ -42,6 +42,10 @@ end organization;
 /
 show errors
 
+
+-- behavior is different between oracle and postgres. Postgres
+-- version adds in the first organization_type to the organization_type_map
+-- table, to specify which type this organization is.
 create or replace package body organization
 as
     function new (
@@ -102,9 +106,12 @@ end new;
   ) 
   is
   begin
+
+   -- these delete statements should not be necessary
    delete from acs_permissions 
      where object_id = organization.del.p_organization_id; 
 
+   -- need to remove items from organization_type_map, like postgres
    delete from organizations 
      where organization_id = organization.del.p_organization_id;
 
@@ -115,3 +122,5 @@ end new;
 end organization;
 /
 show errors
+
+-- name function is missing in Oracle version!! Need to port from Postgres

@@ -13,9 +13,15 @@
         <database>postgresql</database>
     </database-support>
         <owner url="mailto:jon@mayuli.com">Jon Griffin</owner>
-        <summary>Implementation of HR-XML organizations spec.</summary>
-        <vendor url="http://www.mayuli.com">Mayuli Enterprises LLC</vendor>
-        <description format="text/plain">Implementation of HR-XML organizations spec.</description>
+        <summary>Implementation of HR-XML organizations datamodel.</summary>
+        <vendor url="http://www.mayuli.com">Mayuli Enterprises, LLC</vendor>
+
+        <description format="text/plain">Provides the datamodel for an
+      implementation of the HR-XML organizations spec, but no API for
+      manipulating the data.  Also note that the Oracle code is out of sync
+      with the Postgres code. The source code has comments in it indicating
+      what needs to be updated to make things work correctly [Jade Rubick].
+        </description>
 
         <requires url="acs-kernel" version="5.0d13"/>
 
