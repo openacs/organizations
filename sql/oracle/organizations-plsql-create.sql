@@ -108,7 +108,7 @@ end new;
    delete from organizations 
      where organization_id = organization.del.p_organization_id;
 
-   party.delete(organization.del.p_organization_id);
+   party.del(organization.del.p_organization_id);
 
   end del;
   
