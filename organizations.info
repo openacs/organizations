@@ -14,7 +14,7 @@
     </database-support>
         <owner url="mailto:jon@mayuli.com">Jon Griffin</owner>
         <summary>Implementation of HR-XML organizations datamodel.</summary>
-        <vendor url="http://www.mayuli.com">Mayuli Enterprises LLC</vendor>
+        <vendor url="http://www.mayuli.com">Mayuli Enterprises, LLC</vendor>
 
         <description format="text/plain">Provides the datamodel for an
       implementation of the HR-XML organizations spec, but no API for
