@@ -182,7 +182,7 @@ create or replace function organization__name (integer)
 returns varchar as '
 declare
     p_organization_id    alias for $1;
-    v_organization_name  organization.name%TYPE;
+    v_organization_name  organizations.name%TYPE;
 begin
         select name into v_organization_name
                 from organizations
