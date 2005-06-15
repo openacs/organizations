@@ -10,7 +10,7 @@ ad_library {
     @cvs-id $Id$
 }
 
-
+namespace eval organization {}
 namespace eval organizations {}
 
 ad_proc -public organizations::name {
@@ -36,3 +36,57 @@ ad_proc -public organizations::name {
         organization_id = :organization_id
     } -default ""]
 }
+
+ad_proc -public organization::new {
+    {-organization_id ""}
+    {-legal_name ""}
+    {-name:required}
+    {-notes ""}
+    {-organization_type_id ""}
+    {-reg_number ""}
+    {-email ""}
+    {-url ""}
+    {-user_id ""}
+    {-peeraddr ""}
+    {-package_id ""}
+} {
+    Creates a new organization
+    
+    @author Matthew Geddert (openacs@geddert.com)
+    @creation-date 2004-06-14
+    
+    @return organization_id
+    
+    @error returns an empty string
+} {
+    if { ![exists_and_not_null user_id] } {
+	set user_id [ad_conn user_id]
+    }
+    if { ![exists_and_not_null peeraddr] } {
+	set peeraddr [ad_conn peeraddr]
+    }
+    if { ![exists_and_not_null package_id] } {
+	set package_id [ad_conn package_id]
+    }
+
+    set organization_id [db_exec_plsql create_organization {
+	select organization__new ( 
+				  :legal_name,
+				  :name,
+				  :notes,
+				  :organization_id,
+				  :organization_type_id,
+				  :reg_number,
+				  :email,
+				  :url,
+				  :user_id,
+				  :peeraddr,
+				  :package_id
+				  )
+    }]
+
+    return $organization_id
+}
+
+
+
