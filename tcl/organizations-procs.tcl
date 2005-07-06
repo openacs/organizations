@@ -37,6 +37,21 @@ ad_proc -public organizations::name {
     } -default ""]
 }
 
+ad_proc -public organization::get_by_name {
+    {-name:required}
+} {
+    Return the organization_id of the organization with the given name. Uses
+    a lowercase comparison so we do not allow organizations to differ only 
+    in case. Returns empty string if no organization found.
+
+    @author Matthew Geddert (openacs@geddert.com)
+    @creation-date 2005-07-06
+    
+    @return organization_id
+} {
+    return [db_string get_by_name { select organization_id from organizations where lower(name) = lower(:name) } -default {}]
+}
+
 ad_proc -public organization::new {
     {-organization_id ""}
     {-legal_name ""}
