@@ -103,5 +103,41 @@ ad_proc -public organization::new {
     return $organization_id
 }
 
+ad_proc -public organizations::id {
+    {-name:required}
+} {
+    Returns the organization id for a given name
+    
+    @author Christian Langmann (C_Langmann@gmx.de)
+    @creation-date 2005-06-14
+    
+    @param name the name to look for
+
+    @return organization id
+    
+    @error returns an empty string
+} {
+    return [db_string get_id {
+        SELECT
+        organization_id
+        FROM
+        organizations
+        WHERE
+        name = :name
+    } -default ""]
+}
+
+ad_proc -public organization::name_p {
+    {-name:required}
+} {
+    this returns whether the organization with the given name exists
+} {
+
+    if {[db_0or1row contact_org_exists_p {select '1' from organizations where name = :name}]} {
+	return 1
+    } else {
+      	return 0
+    }
+}
 
 
