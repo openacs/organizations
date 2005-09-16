@@ -141,3 +141,27 @@ ad_proc -public organization::name_p {
 }
 
 
+ad_proc -public organization::organization_p {
+    {-party_id:required}
+} {
+    is this party an organization? Cached
+} {
+    return [util_memoize [list ::organization::organization_p_not_cached -party_id $party_id]]
+}
+
+ad_proc -public organization::organization_p_not_cached {
+    {-party_id:required}
+} {
+    is this party and organization?
+} {
+    if {[person::person_p -party_id $party_id]} {
+        return 0
+    } else {
+        if {[db_0or1row contact_org_exists_p {select '1' from organizations where organization_id = :party_id}]} {
+            return 1
+        } else {
+            return 0
+        }
+    }
+}
+
