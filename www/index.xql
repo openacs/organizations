@@ -10,10 +10,12 @@
 	o.notes,
 	ot.type as organization_type
 	FROM
-	organizations o,
-	organization_types ot,
-	organization_type_map tm
-	WHERE
+	organizations o
+        INNER JOIN acs_objects ob ON o.organization_id = ob.object_id
+        LEFT JOIN organization_type_map tm ON o.organization_id = tm.organization_id
+	INNER JOIN organization_types ot ON ot.organization_type_id = tm.organization_type_id
+        WHERE
+        ob.context_id           = :package_id and
 	o.organization_id       = tm.organization_id and
 	tm.organization_type_id = ot.organization_type_id
 	[template::list::filter_where_clauses -and -name "orgs"]

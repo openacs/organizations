@@ -5,32 +5,32 @@
 
 <table>
 <tr>
-<th>Name:</th>
+<th align="right">Name:</th>
 <td>@name@</td>
 </tr>
 
 <tr>
-<th>Legal name:</th>
+<th align="right">Legal name:</th>
 <td>@legal_name@</td>
 </tr>
 
 <tr>
-<th>Email:</th>
+<th align="right">Email:</th>
 <td><a href="mailto:@email@">@email@</a></td>
 </tr>
 
 <tr>
-<th>Website:</th>
+<th align="right">Website:</th>
 <td><a href="@url@">@url@</a></td>
 </tr>
 
 <tr>
-<th>Registration number:</th>
+<th align="right">Registration number:</th>
 <td>@reg_number@</td>
 </tr>
 
 <tr>
-<th>Notes:</th>
+<th align="right">Notes:</th>
 <td>@notes@</td>
 </tr>
 </table>

@@ -7,20 +7,20 @@
     <initial-install-p>f</initial-install-p>
     <singleton-p>f</singleton-p>
     
-    <version name="0.5d3" url="http://openacs.org/repository/download/apm/organizations-0.5d3.apm">
-        <owner url="mailto:jon@mayuli.com">Jon Griffin</owner>
-        <owner url="mailto:jader@bread.com">Jade Rubick</owner>
+    <version name="0.6d1" url="http://openacs.org/repository/download/apm/organizations-0.6d1.apm">
+        <owner url="mailto:alexk@bread.com">Alex Kroman</owner>
         <summary>Implementation of HR-XML organizations datamodel.</summary>
-        <release-date>2004-06-25</release-date>
-        <vendor url="http://www.mayuli.com">Mayuli Enterprises, LLC</vendor>
+        <release-date>2005-10-14</release-date>
+        <vendor url="http://www.bread.com/">Integrated Bakery Resources</vendor>
         <description format="text/plain">Provides the datamodel for an
       implementation of the HR-XML organizations spec, but no API for
       manipulating the data.  Also note that the Oracle code is out of sync
       with the Postgres code. The source code has comments in it indicating
       what needs to be updated to make things work correctly [Jade Rubick].
         </description>
+        <maturity>0</maturity>
 
-        <provides url="organizations" version="0.5d3"/>
+        <provides url="organizations" version="0.6d1"/>
         <requires url="acs-kernel" version="5.0d13"/>
 
         <callbacks>
