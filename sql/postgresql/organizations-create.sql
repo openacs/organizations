@@ -41,9 +41,7 @@ create table organizations (
                           references parties(party_id),
     name              varchar(200)
                       constraint organization_name_nn
-                          not null
-                      constraint organization_name_uq
-                          unique,
+                          not null,
     -- usually the same as name
     legal_name        varchar(200),
     -- this can be ein/ssn/vat

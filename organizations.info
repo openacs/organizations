@@ -7,7 +7,7 @@
     <initial-install-p>f</initial-install-p>
     <singleton-p>f</singleton-p>
     
-    <version name="0.5d3" url="http://openacs.org/repository/download/apm/organizations-0.5d3.apm">
+    <version name="0.5d4" url="http://openacs.org/repository/download/apm/organizations-0.5d4.apm">
         <owner url="mailto:jon@mayuli.com">Jon Griffin</owner>
         <owner url="mailto:jader@bread.com">Jade Rubick</owner>
         <summary>Implementation of HR-XML organizations datamodel.</summary>
@@ -20,7 +20,7 @@
       what needs to be updated to make things work correctly [Jade Rubick].
         </description>
 
-        <provides url="organizations" version="0.5d3"/>
+        <provides url="organizations" version="0.5d4"/>
         <requires url="acs-kernel" version="5.0d13"/>
 
         <callbacks>
