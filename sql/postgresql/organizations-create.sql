@@ -46,10 +46,13 @@ create table organizations (
     legal_name        varchar(200),
     -- this can be ein/ssn/vat
     reg_number        varchar(100),
+    -- The internal client_id. You should have your own sequence for that.
+    client_id	      varchar(100),
     notes             text
 ); 
 
 create index organization_name_ix on organizations(name);
+create index organization_cliend_idx on organizations(client_id);
 
 create table organization_type_map (
     organization_id             integer

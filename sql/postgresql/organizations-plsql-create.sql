@@ -74,6 +74,9 @@ begin
     p_context_id 
   );   
    
+  update acs_objects
+  set title = p_name
+  where object_id = v_organization_id;
 
   insert into organizations (
     legal_name,
