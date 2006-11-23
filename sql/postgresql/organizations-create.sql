@@ -47,7 +47,7 @@ create table organizations (
     -- this can be ein/ssn/vat
     reg_number        varchar(100),
     -- The internal client_id. You should have your own sequence for that.
-    client_id	      varchar(100),
+    client_id	      varchar(100) constraint orga_client_id_un unique,
     notes             text
 ); 
 
