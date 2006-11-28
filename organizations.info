@@ -7,7 +7,7 @@
     <initial-install-p>f</initial-install-p>
     <singleton-p>f</singleton-p>
     
-    <version name="0.6d1" url="http://openacs.org/repository/download/apm/organizations-0.6d1.apm">
+    <version name="0.6d2" url="http://openacs.org/repository/download/apm/organizations-0.6d2.apm">
         <owner url="mailto:alexk@bread.com">Alex Kroman</owner>
         <summary>Implementation of HR-XML organizations datamodel.</summary>
         <release-date>2005-10-14</release-date>
@@ -20,7 +20,7 @@
         </description>
         <maturity>0</maturity>
 
-        <provides url="organizations" version="0.6d1"/>
+        <provides url="organizations" version="0.6d2"/>
         <requires url="acs-kernel" version="5.0d13"/>
 
         <callbacks>
