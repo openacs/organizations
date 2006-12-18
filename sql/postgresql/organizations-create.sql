@@ -39,9 +39,7 @@ create table organizations (
                           primary key
                       constraint organization_id_fk
                           references parties(party_id),
-    name              varchar(200)
-                      constraint organization_name_nn
-                          not null,
+    name              varchar(200),
     -- usually the same as name
     legal_name        varchar(200),
     -- this can be ein/ssn/vat
